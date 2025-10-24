@@ -1,0 +1,114 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background: #f4f4f4;
+}
+
+/* Header */
+.header {
+    background-color: #333;
+    padding: 15px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Navigation */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 20px;
+    background-color: #eee;
+}
+
+/* Dashboard Cards */
+.dashboard-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 25%;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* Chart Section */
+.chart-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 20px;
+}
+
+.chart-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 45%;
+    margin-bottom: 30px;
+}
+
+/* Low Stock & Recent Orders */
+.low-stock-section,
+.recent-orders-section {
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.low-stock-section h2,
+.recent-orders-section h2 {
+    margin-bottom: 15px;
+}
+
+/* Low Stock List */
+.low-stock-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.low-stock-section li {
+    padding: 5px 0;
+    color: #b00020;
+}
+
+/* Recent Orders Table */
+.recent-orders-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.recent-orders-section th,
+.recent-orders-section td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}

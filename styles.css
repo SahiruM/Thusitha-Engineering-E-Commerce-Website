@@ -1,0 +1,248 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #1C2526;
+  color: #fff;
+}
+
+/* Navigation Links */
+.nav-link {
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #000000;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #080808;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Banner Section */
+.banner {
+  position: relative;
+  text-align: center;
+  padding: 4rem;
+  background: url('https://res-sg.rdmcenter.com/stc/website-center/upload/ingco/Philippines-INGCO-Website/images/HOME%20PAGE%20-%20TOOLS%20DESIGNATION%20SLIDE%20BANNER-12.jpg') no-repeat center center/cover;
+  color: white;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 5px solid #000;
+  overflow: hidden;
+}
+
+.banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.6);  z-index: 0;
+}
+
+.banner * {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+
+.banner h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/* Products Section */
+.products {
+  padding: 2rem;
+  height: 300px;              /* fixed height */
+  object-fit: cover; 
+  margin: 0 auto;
+  text-align: center;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 2rem;
+}
+.products h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #F5A623;
+  text-transform: uppercase;
+  min-height: 6em; /* Ensures consistent height even with 1 or 2 line titles */
+
+}
+
+
+
+.product {
+  background: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 5px;
+  position: relative;
+  flex: 1 1 200px;
+  max-width: 250px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product img {
+  max-width: 100px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.product img:hover {
+  transform: scale(1.1);
+}
+
+.product p {
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.product .price {
+  color: #ff4500;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+/* Buttons */
+.add-to-cart{
+
+background: #0a4e10;
+color: white;
+border: none;
+padding: 0.75rem 2rem;
+cursor: pointer;
+border-radius: 5px;
+font-weight: bold;
+text-transform: uppercase;
+width: 100%;
+margin-top: 0.5rem;
+transition: background 0.3s ease;
+font-size: 0.8rem;
+}
+.add-to-wishlist {
+  background: #F5A623;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 100%;
+  margin-top: 0.5rem;
+  transition: background 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.add-to-cart:hover,
+.add-to-wishlist:hover {
+  background: #e69500;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  display: inline-block;
+}
+
+.in-stock {
+  background-color: #28a745;
+  color: white;
+}
+
+.out-stock {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Rating Hearts */
+.rating {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.rating i {
+  font-style: normal;
+  font-size: 1rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  margin: 0 2px;
+}
+
+.rating i.filled {
+  color: #ff4d4d;
+}
+
+/* Category Dropdown Styling */
+.category-items {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  margin-top: 1rem;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: #f4f4f4;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.category-item:hover {
+  background: #F5A623;
+}
+
+.category-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.category-item span {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #000;
+}
