@@ -26,7 +26,7 @@
     <section class="hero">
         <div class="overlay">
             <div class="login-box">
-                <h1 style="font-family: 'Bayon', sans-serif; color: white; font-size: 3rem; text-decoration: none;">LOG IN</h1>
+                <h1>Log in</h1>
                 <h2>EMAIL</h2>
                 <input type="email" id="email" placeholder="">
                 <h2>PASSWORD</h2>
@@ -36,7 +36,7 @@
                 </div>
                 <button class="login-btn" onclick="login()">LOG IN</button>
                 <p>No account? <a href="register.php">Register here</a></p>
-                <p style="margin-top: -30px;"><a href="adminLogin.php">Admin login</a></p>
+                <p><a href="adminLogin.php">Admin login</a></p>
             </div>
         </div>
     </section>
