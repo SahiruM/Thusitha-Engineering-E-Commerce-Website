@@ -2,10 +2,6 @@
 
 require_once __DIR__ . "/config.php";
 
-if (file_exists(__DIR__ . "/config.local.php")) {
-    require_once __DIR__ . "/config.local.php";
-}
-
 class Database {
 
     public static $connection;
