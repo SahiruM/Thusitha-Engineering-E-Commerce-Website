@@ -1,6 +1,7 @@
 <?php
 
 require "connection.php";
+require "require_admin.php";
 require "upload_helpers.php";
 
 $pName = trim($_POST["pName"] ?? "");

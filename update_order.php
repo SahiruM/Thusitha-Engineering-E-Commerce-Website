@@ -1,19 +1,31 @@
 <?php
+
 require "connection.php";
+require "require_admin.php";
 
-$id = $_POST['id'];
-$name = $_POST['name'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
-$payment = $_POST['payment'];
-$address = $_POST['shipping_address'];
+$id = (int)($_POST['id'] ?? 0);
+$name = trim($_POST['name'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$phone = trim($_POST['phone'] ?? '');
+$payment = trim($_POST['payment'] ?? '');
+$address = trim($_POST['shipping_address'] ?? '');
 
-$update = Database::iud("UPDATE `checkout` SET 
-    `name`='$name', 
-    `email`='$email', 
-    `phone`='$phone', 
-    `payment_method`='$payment', 
-    `shipping_address`='$address' 
-    WHERE `id`='$id'");
+if ($id <= 0 || $name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $phone === '' || $address === '') {
+    echo "Invalid order details.";
+    exit();
+}
+
+Database::execute(
+    "UPDATE `checkout` SET `name` = ?, `email` = ?, `phone` = ?, `payment_method` = ?, `shipping_address` = ? WHERE `id` = ?",
+    "sssssi",
+    $name,
+    $email,
+    $phone,
+    $payment,
+    $address,
+    $id
+);
+
+echo "success";
 
 ?>

@@ -1,25 +1,18 @@
 <?php
 
 require "connection.php";
-// session_start();
+require "require_admin.php";
 
+$id = (int)($_POST["id"] ?? 0);
 
-$id = $_POST["id"];
+if ($id <= 0) {
+    echo json_encode(null);
+    exit();
+}
 
+$rs = Database::select("SELECT * FROM `product` WHERE `product_id` = ?", "i", $id);
+$product = $rs->fetch_assoc();
 
-
-
-   $rs= Database::search("SELECT * FROM `product` WHERE `product_id`='".$id."'");
-
-    $product = $rs->fetch_assoc();
-
-
-
-    echo json_encode($product);
-
-
-
-
-
+echo json_encode($product);
 
 ?>

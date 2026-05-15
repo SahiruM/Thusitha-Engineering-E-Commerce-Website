@@ -1,11 +1,16 @@
 <?php
-require "connection.php";
 
-if (isset($_POST['order_id'])) {
-    $orderId = $_POST['order_id'];
-    $result = Database::iud("DELETE FROM `checkout` WHERE `id` = '$orderId'");
-    echo "success";
-} else {
+require "connection.php";
+require "require_admin.php";
+
+$orderId = (int)($_POST['order_id'] ?? 0);
+
+if ($orderId <= 0) {
     echo "Invalid request.";
+    exit();
 }
+
+Database::execute("DELETE FROM `checkout` WHERE `id` = ?", "i", $orderId);
+echo "success";
+
 ?>

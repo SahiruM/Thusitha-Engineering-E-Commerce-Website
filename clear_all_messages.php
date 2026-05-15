@@ -1,9 +1,10 @@
 <?php
-require "connection.php";
 
-// Execute the delete query
+require "connection.php";
+require "require_admin.php";
+
 Database::iud("DELETE FROM `message`");
 
-// Return a simple success message
 echo "success";
+
 ?>

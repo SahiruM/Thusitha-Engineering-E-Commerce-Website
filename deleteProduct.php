@@ -1,18 +1,20 @@
 <?php
+
 require "connection.php";
+require "require_admin.php";
 
-// Get the item ID from POST
-$item_id = $_POST["id"];
+$item_id = (int)($_POST["id"] ?? 0);
 
+if ($item_id <= 0) {
+    echo "Invalid product.";
+    exit();
+}
 
-        // Quantity is 1, so delete the item
-        Database::iud("DELETE FROM `wishlist` WHERE `product_product_id` = '".$item_id."'");
+Database::execute("DELETE FROM `wishlist` WHERE `product_product_id` = ?", "i", $item_id);
+Database::execute("DELETE FROM `cart_item` WHERE `product_product_id` = ?", "i", $item_id);
+Database::execute("DELETE FROM `reviews` WHERE `product_product_id` = ?", "i", $item_id);
+Database::execute("DELETE FROM `product` WHERE `product_id` = ?", "i", $item_id);
 
-        Database::iud("DELETE FROM `cart_item` WHERE `product_product_id` = '".$item_id."'");
-
-        Database::iud("DELETE FROM `reviews` WHERE `product_product_id` = '".$item_id."'");
-
-        Database::iud("DELETE FROM `product` WHERE `product_id` = '".$item_id."'");
-      echo("done");
+echo "done";
 
 ?>
