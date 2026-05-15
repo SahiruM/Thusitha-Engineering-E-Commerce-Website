@@ -1,7 +1,7 @@
 <?php 
 require "connection.php";
 session_start();
-$userid=$_SESSION["user2"]["id"];
+$userid = isset($_SESSION["user2"]["id"]) ? (int)$_SESSION["user2"]["id"] : null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,22 +45,22 @@ $userid=$_SESSION["user2"]["id"];
                 </h3>
                 <div class="support-icons-container">
                     <div class="support-icons">
-                        <a href="https://wa.me/94742925420" target="_blank" class="social-link">
+                        <a href="https://wa.me/94742925420" target="_blank" class="social-link" aria-label="WhatsApp">
                             <span class="icon"><i class="fab fa-whatsapp"></i></span>
                         </a>
-                        <a href="https://web.facebook.com/people/Thusitha-Engineering/61550271124318/?_rdc=1&_rdr" target="_blank" class="social-link">
+                        <a href="https://web.facebook.com/people/Thusitha-Engineering/61550271124318/?_rdc=1&_rdr" target="_blank" class="social-link" aria-label="Facebook">
                             <span class="icon"><i class="fab fa-facebook-f"></i></span>
                         </a>
-                        <a href="https://www.instagram.com/ThusithaEngineering" target="_blank" class="social-link">
+                        <a href="https://www.instagram.com/ThusithaEngineering" target="_blank" class="social-link" aria-label="Instagram">
                             <span class="icon"><i class="fab fa-instagram"></i></span>
                         </a>
-                        <a href="https://maps.app.goo.gl/A1Hg9T7DrBkw153X9" target="_blank" class="social-link">
+                        <a href="https://maps.app.goo.gl/A1Hg9T7DrBkw153X9" target="_blank" class="social-link" aria-label="Google Maps">
                             <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
                         </a>
-                        <a href="https://www.linkedin.com/company/thusitha-engineering" target="_blank" class="social-link">
+                        <a href="https://www.linkedin.com/company/thusitha-engineering" target="_blank" class="social-link" aria-label="LinkedIn">
                             <span class="icon"><i class="fab fa-linkedin-in"></i></span>
                         </a>
-                        <a href="https://www.youtube.com/channel/ThusithaEngineering" target="_blank" class="social-link">
+                        <a href="https://www.youtube.com/channel/ThusithaEngineering" target="_blank" class="social-link" aria-label="YouTube">
                             <span class="icon"><i class="fab fa-youtube"></i></span>
                         </a>
                     </div>
@@ -82,25 +82,35 @@ $userid=$_SESSION["user2"]["id"];
 
         <div class="comments">
             <h2>Comments</h2>
-            <div class="comment-input-container">
-                <textarea id="comment-input" placeholder="Leave a comment..."></textarea>
-                <button onclick="saveComment()">Post Comment</button>
-            </div>
+            <?php if ($userid): ?>
+                <div class="comment-input-container">
+                    <textarea id="comment-input" placeholder="Leave a comment..."></textarea>
+                    <button onclick="saveComment()">Post Comment</button>
+                </div>
+            <?php else: ?>
+                <p>Please <a href="login.php">log in</a> to leave and manage comments.</p>
+            <?php endif; ?>
 
      
 
             <ul id="comment-list">
             <?php
-                $commentsRs = Database::search("SELECT * FROM `comments` INNER JOIN `user` ON `comments`.`user_id` = `user`.`id` WHERE `comments`.`user_id` = '$userid'");
-                while ($comments = $commentsRs->fetch_assoc()) {
+                if ($userid) {
+                    $commentsRs = Database::select(
+                        "SELECT * FROM `comments` INNER JOIN `user` ON `comments`.`user_id` = `user`.`id` WHERE `comments`.`user_id` = ?",
+                        "i",
+                        $userid
+                    );
+                    while ($comments = $commentsRs->fetch_assoc()) {
                     ?>
                     <li>
-                    <input type="text" id="comment<?php echo($comments['comments_id'])?>" value="<?php echo($comments["msg"])?> ">
+                    <input type="text" id="comment<?php echo (int)$comments['comments_id']; ?>" value="<?php echo htmlspecialchars($comments["msg"]); ?>">
                         
-                        <button onclick="updateComment(<?php echo($comments['comments_id'])?>)">Update</button>
-                        <button onclick="deleteComment(<?php echo($comments['comments_id'])?>)">Delete</button>
+                        <button onclick="updateComment(<?php echo (int)$comments['comments_id']; ?>)">Update</button>
+                        <button onclick="deleteComment(<?php echo (int)$comments['comments_id']; ?>)">Delete</button>
                     </li>
                     <?php
+                    }
                 }
             ?> 
                     
@@ -110,13 +120,13 @@ $userid=$_SESSION["user2"]["id"];
         <div class="social-media">
             <h2>Follow Us</h2>
             <div class="social-icons">
-                <a href="https://wa.me/94742925420" target="_blank" class="social-link">
+                <a href="https://wa.me/94742925420" target="_blank" class="social-link" aria-label="WhatsApp">
                     <span class="icon"><i class="fab fa-whatsapp"></i></span>
                 </a>
-                <a href="https://web.facebook.com/people/Thusitha-Engineering/61550271124318/?_rdc=1&_rdr#" target="_blank" class="social-link">
+                <a href="https://web.facebook.com/people/Thusitha-Engineering/61550271124318/?_rdc=1&_rdr#" target="_blank" class="social-link" aria-label="Facebook">
                     <span class="icon"><i class="fab fa-facebook-f"></i></span>
                 </a>
-                <a href="https://www.instagram.com/ThusithaEngineering" target="_blank" class="social-link">
+                <a href="https://www.instagram.com/ThusithaEngineering" target="_blank" class="social-link" aria-label="Instagram">
                     <span class="icon"><i class="fab fa-instagram"></i></span>
                 </a>
             </div>

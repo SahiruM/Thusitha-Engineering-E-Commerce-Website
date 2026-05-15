@@ -1,20 +1,27 @@
 <?php
-session_start();
 
-$userid = $_SESSION["user2"]["id"];
+session_start();
 require "connection.php";
 
+$name = trim($_POST["name"] ?? "");
+$email = trim($_POST["email"] ?? "");
+$phone = trim($_POST["phone"] ?? "");
+$message = trim($_POST["message"] ?? "");
 
-$name = $_POST["name"];
-$email = $_POST["email"];
-$phone = $_POST["phone"];
-$message = $_POST["message"];
+if ($name === "" || !filter_var($email, FILTER_VALIDATE_EMAIL) || $phone === "" || $message === "") {
+    echo "Please enter valid message details.";
+    exit();
+}
 
-// Basic sanitization
-$name = addslashes($name);
-$email = addslashes($email);
-$phone = addslashes($phone);
-$message = addslashes($message);
+Database::execute(
+    "INSERT INTO `message` (`msg_name`, `msg_mail`, `phone`, `comment`) VALUES (?, ?, ?, ?)",
+    "ssss",
+    $name,
+    $email,
+    $phone,
+    $message
+);
 
-// Perform the insert query
-Database::iud("INSERT INTO `message` (`msg_name`, `msg_mail`, `phone`, `comment`) VALUES ('".$name."', '".$email."', '".$phone."', '".$message."')");
+echo "done";
+
+?>

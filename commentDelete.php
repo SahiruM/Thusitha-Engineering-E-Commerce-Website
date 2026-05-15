@@ -1,13 +1,23 @@
 <?php
+
 session_start();
 require "connection.php";
 
+if (!isset($_SESSION["user2"]["id"])) {
+    echo "Please log in first.";
+    exit();
+}
 
-$userid = $_SESSION["user2"]["id"];
-$id = $_POST["id"];
+$userid = (int)$_SESSION["user2"]["id"];
+$id = (int)($_POST["id"] ?? 0);
 
-// Basic sanitization
-$id = intval($id);
+if ($id <= 0) {
+    echo "Invalid comment.";
+    exit();
+}
 
-// delete query
-Database::iud("DELETE FROM `comments` WHERE `comments_id` = '".$id."'");
+Database::execute("DELETE FROM `comments` WHERE `comments_id` = ? AND `user_id` = ?", "ii", $id, $userid);
+
+echo "done";
+
+?>

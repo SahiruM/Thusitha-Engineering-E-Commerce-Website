@@ -1,14 +1,24 @@
 <?php
+
 session_start();
 require "connection.php";
 
-$userid = $_SESSION["user2"]["id"];
-$id = $_POST["id"];
-$text = $_POST["text"];
+if (!isset($_SESSION["user2"]["id"])) {
+    echo "Please log in first.";
+    exit();
+}
 
-// Basic sanitization
-$id = intval($id);
-$text = addslashes($text);
+$userid = (int)$_SESSION["user2"]["id"];
+$id = (int)($_POST["id"] ?? 0);
+$text = trim($_POST["text"] ?? "");
 
-// Perform the update query
-Database::iud("UPDATE `comments` SET `msg` = '".$text."' WHERE `comments_id` = '".$id."'");
+if ($id <= 0 || $text === "") {
+    echo "Invalid comment.";
+    exit();
+}
+
+Database::execute("UPDATE `comments` SET `msg` = ? WHERE `comments_id` = ? AND `user_id` = ?", "sii", $text, $id, $userid);
+
+echo "done";
+
+?>

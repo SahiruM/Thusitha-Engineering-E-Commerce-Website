@@ -1,11 +1,23 @@
 <?php
+
 session_start();
 require "connection.php";
 
-$userid = $_SESSION["user2"]["id"];
-$message = $_POST["message"];
+if (!isset($_SESSION["user2"]["id"])) {
+    echo "Please log in first.";
+    exit();
+}
 
-$userid = intval($userid);
-$message = addslashes($message);
+$userid = (int)$_SESSION["user2"]["id"];
+$message = trim($_POST["message"] ?? "");
 
-Database::iud("INSERT INTO `comments` (`msg`, `user_id`) VALUES ('".$message."', '".$userid."')");
+if ($message === "") {
+    echo "Comment cannot be empty.";
+    exit();
+}
+
+Database::execute("INSERT INTO `comments` (`msg`, `user_id`) VALUES (?, ?)", "si", $message, $userid);
+
+echo "done";
+
+?>
