@@ -1,6 +1,7 @@
 <?php
 
 require "connection.php";
+require "upload_helpers.php";
 session_start();
 
 $newName = trim($_POST["username"] ?? "");
@@ -37,18 +38,11 @@ if ($existingUser->num_rows > 0) {
 
 $newPp = null;
 
-if (isset($_FILES["fileInput"]) && $_FILES["fileInput"]["error"] == 0) {
-    $fileTmpPath = $_FILES["fileInput"]["tmp_name"];
-    $fileName = basename($_FILES["fileInput"]["name"]);
-    $uploadDir = "uploads/";
-    $destinationPath = $uploadDir . uniqid("", true) . "_" . $fileName;
-
-    if (move_uploaded_file($fileTmpPath, $destinationPath)) {
-        $newPp = $destinationPath;
-    } else {
-        echo "Error uploading file.";
-        exit();
-    }
+try {
+    $newPp = saveUploadedImage("fileInput", "uploads", false);
+} catch (RuntimeException $e) {
+    echo $e->getMessage();
+    exit();
 }
 
 $passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);

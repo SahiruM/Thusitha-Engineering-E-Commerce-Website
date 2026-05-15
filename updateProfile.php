@@ -1,6 +1,8 @@
 <?php
+
 session_start();
 require "connection.php";
+require "upload_helpers.php";
 
 if (!isset($_SESSION["user"])) {
     echo "User not logged in.";
@@ -9,14 +11,17 @@ if (!isset($_SESSION["user"])) {
 
 $user_email = $_SESSION["user"]["customer_email"];
 
-$newName = $_POST["username"];
-$newTele = $_POST["usertele"];
-$newAddress = $_POST["useraddress"];
-$newPassword = $_POST["userpassword"]; // optional
-$newPp = null;
+$newName = trim($_POST["username"] ?? "");
+$newTele = trim($_POST["usertele"] ?? "");
+$newAddress = trim($_POST["useraddress"] ?? "");
+$newPassword = $_POST["userpassword"] ?? "";
 
-// Get current user data
-$result = Database::search("SELECT * FROM `customer_table` WHERE `customer_email` = '$user_email'");
+if ($newName === "" || !preg_match('/^\d{10}$/', $newTele) || $newAddress === "") {
+    echo "Please enter valid profile details.";
+    exit();
+}
+
+$result = Database::select("SELECT * FROM `customer_table` WHERE `customer_email` = ?", "s", $user_email);
 if ($result->num_rows !== 1) {
     echo "User not found.";
     exit();
@@ -24,44 +29,49 @@ if ($result->num_rows !== 1) {
 
 $currentData = $result->fetch_assoc();
 
-// If a file was uploaded
-if (isset($_FILES["fileInput"]) && $_FILES["fileInput"]["error"] == 0) {
-    $fileTmpPath = $_FILES["fileInput"]["tmp_name"];
-    $fileName = $_FILES["fileInput"]["name"];
-    $uploadDir = "uploads/";
-    $destinationPath = $uploadDir . uniqid() . "_" . $fileName;
+try {
+    $uploadedPp = saveUploadedImage("fileInput", "uploads", false);
+} catch (RuntimeException $e) {
+    echo $e->getMessage();
+    exit();
+}
 
-    if (move_uploaded_file($fileTmpPath, $destinationPath)) {
-        $newPp = $destinationPath;
-    } else {
-        echo "Error uploading profile picture.";
+$newPp = $uploadedPp ?: $currentData["customer_pp"];
+
+if ($newPassword !== "") {
+    if (strlen($newPassword) < 8) {
+        echo "Password must be at least 8 characters.";
         exit();
     }
+
+    $passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+    Database::execute(
+        "UPDATE `customer_table` SET `customer_name` = ?, `customer_telephone` = ?, `customer_address` = ?, `customer_pp` = ?, `customer_password` = ? WHERE `customer_email` = ?",
+        "ssssss",
+        $newName,
+        $newTele,
+        $newAddress,
+        $newPp,
+        $passwordHash,
+        $user_email
+    );
+    Database::execute("UPDATE `user` SET `name` = ?, `mobile` = ?, `password` = ? WHERE `email` = ?", "ssss", $newName, $newTele, $passwordHash, $user_email);
 } else {
-    $newPp = $currentData["customer_pp"]; // Keep existing image
+    Database::execute(
+        "UPDATE `customer_table` SET `customer_name` = ?, `customer_telephone` = ?, `customer_address` = ?, `customer_pp` = ? WHERE `customer_email` = ?",
+        "sssss",
+        $newName,
+        $newTele,
+        $newAddress,
+        $newPp,
+        $user_email
+    );
+    Database::execute("UPDATE `user` SET `name` = ?, `mobile` = ? WHERE `email` = ?", "sss", $newName, $newTele, $user_email);
 }
 
-// Update query
-$query = "UPDATE `customer_table` SET 
-    `customer_name` = '$newName',
-    `customer_telephone` = '$newTele',
-    `customer_address` = '$newAddress',
-    `customer_pp` = '$newPp'";
-
-// Add password only if changed
-if (!empty($newPassword)) {
-    $query .= ", `customer_password` = '$newPassword'";
-}
-
-$query .= " WHERE `customer_email` = '$user_email'";
-
-// Run the update
-Database::iud($query);
-Database::iud("UPDATE `user` SET `name`='$newName', `mobile` = '$newTele',`password`='$newPassword' WHERE `email` = '$user_email'" );
-
-// Update session with new info
-$updatedResult = Database::search("SELECT * FROM `customer_table` WHERE `customer_email` = '$user_email'");
+$updatedResult = Database::select("SELECT * FROM `customer_table` WHERE `customer_email` = ?", "s", $user_email);
 $_SESSION["user"] = $updatedResult->fetch_assoc();
 
 echo "Profile updated successfully.";
+
 ?>
