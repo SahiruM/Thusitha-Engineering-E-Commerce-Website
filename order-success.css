@@ -1,112 +1,62 @@
-/* General Styles */
+:root {
+  --orange: #ff9400;
+  --ink: #172021;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  font-family: "Inter", Arial, sans-serif;
 }
 
-/* Header */
-header {
-    background-color: #FF9400;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 20px;
-}
-
-.logo img {
-    height: 50px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    padding: 0;
-}
-
-nav ul li {
-    margin: 0 40px; 
-    position: relative;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: black;
-    position: relative;
-    padding-bottom: 5px;
-    font-size: 25px;
-    font-family: 'Inter';
-}
-
-/* Creating an animated underline */
-nav ul li a::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background-color: #000000;
-    transition: all 0.3s ease-out;
-    transform: translateX(-50%);
-}
-
-/* Hover effect to draw the underline */
-nav ul li a:hover::after {
-    width: 100%;
-}
-.user-cart img {
-    width: 50px;
-    margin-left: 10px;
-}
-
-/* Hero Section */
-.hero {
-    background: url('assets/homePageCoverPhoto.webp') no-repeat center center/cover;
-    height: 100vh;
-    position: relative;
-}
-
-/* Success Page Styles */
-.success-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
+.success-page {
+  min-height: 72vh;
+  display: grid;
+  place-items: center;
+  padding: 48px 18px;
+  background:
+    linear-gradient(90deg, rgba(16, 23, 24, 0.9), rgba(16, 23, 24, 0.48)),
+    url("assets/homePageCoverPhoto.webp") center/cover no-repeat;
 }
 
 .success-box {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: min(620px, 100%);
+  padding: clamp(28px, 5vw, 48px);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.success-box span {
+  color: #c96800;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .success-box h1 {
-    font-size: 28px;
-    font-family: 'Inter', sans-serif;
-    margin-bottom: 10px;
+  margin: 10px 0 14px;
+  font-family: "Bayon", "Inter", sans-serif;
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 400;
+  line-height: 0.95;
 }
 
 .success-box p {
-    font-size: 18px;
-    margin-bottom: 20px;
+  color: #5d6a6c;
+  line-height: 1.7;
 }
 
 .home-btn {
-    display: inline-block;
-    background: #FF9400;
-    color: white;
-    padding: 12px 24px;
-    font-size: 18px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.home-btn:hover {
-    background: rgba(0, 0, 0, 0.6); 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: 12px;
+  padding: 0 18px;
+  border-radius: 8px;
+  background: var(--orange);
+  color: #111;
+  font-weight: 900;
+  text-decoration: none;
 }
