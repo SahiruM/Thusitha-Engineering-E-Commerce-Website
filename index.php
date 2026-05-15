@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "connection.php";
+require "product_image_helper.php";
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +68,7 @@ require "connection.php";
       while ($product = $products->fetch_assoc()) {
       ?>
         <article class="product-card">
-          <img src="<?php echo htmlspecialchars($product["img"]); ?>" alt="<?php echo htmlspecialchars($product["product_name"]); ?>" loading="lazy" />
+          <img src="<?php echo htmlspecialchars(productImageFor($product)); ?>" alt="<?php echo htmlspecialchars($product["product_name"]); ?>" loading="lazy" />
           <div class="product-card-body">
             <h3><?php echo htmlspecialchars($product["product_name"]); ?></h3>
             <span>Rs. <?php echo number_format((float)$product["price"], 2); ?></span>

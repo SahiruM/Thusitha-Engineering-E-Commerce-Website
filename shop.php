@@ -1,5 +1,6 @@
 <?php
 require "connection.php";
+require "product_image_helper.php";
 session_start();
 ?>
 <!DOCTYPE html>
@@ -54,7 +55,7 @@ session_start();
       ?>
         <article class="product">
           <div class="product-image">
-            <img src="<?php echo htmlspecialchars($product["img"]); ?>" alt="<?php echo htmlspecialchars($product["product_name"]); ?>" loading="lazy" />
+            <img src="<?php echo htmlspecialchars(productImageFor($product)); ?>" alt="<?php echo htmlspecialchars($product["product_name"]); ?>" loading="lazy" />
           </div>
           <div class="product-info">
             <div class="product-topline">

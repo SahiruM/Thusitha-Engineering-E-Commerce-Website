@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "connection.php";
+require "product_image_helper.php";
 if (!isset($_SESSION["admin"])) {
     header("Location: adminLogin.php");
     exit();
@@ -280,7 +281,7 @@ if (!isset($_SESSION["admin"])) {
            
            
             
-            <td><img src="<?php echo ($product["img"]) ?>" alt="Drill" class="product-image"></td>
+            <td><img src="<?php echo htmlspecialchars(productImageFor($product)); ?>" alt="<?php echo htmlspecialchars($product["product_name"]); ?>" class="product-image"></td>
             <td><button onclick="adminModel(<?php echo ($product['product_id']) ?>)" class="edit-btn">Edit</button></td>
 
             <td><button onclick="Delete(<?php echo ($product['product_id']) ?>)" class="edit-btn">Delete</button></td>
