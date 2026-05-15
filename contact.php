@@ -134,20 +134,9 @@ $userid = isset($_SESSION["user2"]["id"]) ? (int)$_SESSION["user2"]["id"] : null
                 
 
 
-<div style="text-align: center; margin: 20px;">
+<div class="report-panel">
     <form action="downloadd_report.php" method="post">
-        <button type="submit" style="
-            background: linear-gradient(to right, #00c853, #00e676);
-            color: white;
-            padding: 12px 24px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 230, 118, 0.4);
-            transition: background 0.3s ease;
-        ">Download Report</button>
+        <button type="submit">Download Report</button>
     </form>
 </div>
 

@@ -10,7 +10,7 @@ if (!isset($_SESSION["user"])) {
 $user = $_SESSION["user"];
 $user_email = $user["customer_email"];
 
-$result = Database::search("SELECT * FROM customer_table WHERE customer_email = '$user_email'");
+$result = Database::select("SELECT * FROM customer_table WHERE customer_email = ?", "s", $user_email);
 $user_data = $result->fetch_assoc();
 ?>
 
@@ -18,6 +18,7 @@ $user_data = $result->fetch_assoc();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thusitha Engineering | Profile</title>
     <link href='https://fonts.googleapis.com/css?family=Bayon' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
@@ -39,19 +40,19 @@ $user_data = $result->fetch_assoc();
                 <!-- Left Column -->
                 <div class="column">
                     <h2>NAME</h2>
-                    <input type="text" id="username" value="<?= $user_data['customer_name'] ?>" disabled>
+                    <input type="text" id="username" value="<?= htmlspecialchars($user_data['customer_name']) ?>" disabled>
                     
                     <h2>EMAIL</h2>
-                    <input type="email" id="useremail" value="<?= $user_data['customer_email'] ?>" disabled>
+                    <input type="email" id="useremail" value="<?= htmlspecialchars($user_data['customer_email']) ?>" disabled>
                     
                     <h2>TELEPHONE NUMBER</h2>
-                    <input type="tel" id="usertele" value="<?= $user_data['customer_telephone'] ?>" disabled>
+                    <input type="tel" id="usertele" value="<?= htmlspecialchars($user_data['customer_telephone']) ?>" disabled>
                 </div>
 
                 <!-- Right Column -->
                 <div class="column">
                     <h2>ADDRESS</h2>
-                    <input type="text" id="useraddress" value="<?= $user_data['customer_address'] ?>" disabled>
+                    <input type="text" id="useraddress" value="<?= htmlspecialchars($user_data['customer_address']) ?>" disabled>
 
                     <h2>PASSWORD</h2>
                     <input type="password" id="userpassword" placeholder="Enter new password" disabled>
@@ -66,7 +67,7 @@ $user_data = $result->fetch_assoc();
                     <div class="upload-area" id="uploadArea">
                         <input type="file" id="fileInput" accept="image/*" hidden>
                         <label for="fileInput" class="upload-label" style="display:none;">Click to Upload</label>
-                        <img id="previewImage" src="<?= $user_data['customer_pp'] ?>" alt="Profile Picture" style="display: block;">
+                        <img id="previewImage" src="<?= htmlspecialchars($user_data['customer_pp']) ?>" alt="Profile Picture" style="display: block;">
                     </div>
                 </div>
             </div>
