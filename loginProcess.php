@@ -27,7 +27,7 @@ if (!$validPassword) {
     exit();
 }
 
-if (hash_equals($storedPassword, $password)) {
+if (hash_equals($storedPassword, $password) && Database::columnLength("customer_table", "customer_password") >= 60) {
     $newHash = password_hash($password, PASSWORD_DEFAULT);
     Database::execute(
         "UPDATE `customer_table` SET `customer_password` = ? WHERE `customer_id` = ?",

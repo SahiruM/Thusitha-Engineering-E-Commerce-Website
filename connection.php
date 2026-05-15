@@ -58,6 +58,20 @@ class Database {
         Database::setUpConnection();
         return Database::$connection->real_escape_string($value);
     }
+
+    public static function columnLength($table, $column) {
+        $result = Database::select(
+            "SELECT CHARACTER_MAXIMUM_LENGTH
+             FROM INFORMATION_SCHEMA.COLUMNS
+             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND COLUMN_NAME = ?",
+            "ss",
+            $table,
+            $column
+        );
+
+        $data = $result->fetch_assoc();
+        return $data ? (int)$data["CHARACTER_MAXIMUM_LENGTH"] : 0;
+    }
 }
 
 ?>
