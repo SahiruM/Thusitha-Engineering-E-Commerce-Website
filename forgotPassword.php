@@ -1,39 +1,31 @@
 <?php
 require "connection.php";
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-require 'PHPMailer/src/Exception.php';
+require "mailer.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"];
-    $result = Database::search("SELECT * FROM `customer_table` WHERE `customer_email` = '$email'");
+    $email = trim($_POST["email"] ?? "");
+    $result = Database::select("SELECT * FROM `customer_table` WHERE `customer_email` = ?", "s", $email);
 
     if ($result->num_rows == 1) {
         $token = bin2hex(random_bytes(50));
         $expiry = date("Y-m-d H:i:s", strtotime('+1 hour'));
 
-        Database::iud("UPDATE `customer_table` SET `reset_token` = '$token', `token_expiry` = '$expiry' WHERE `customer_email` = '$email'");
+        Database::execute(
+            "UPDATE `customer_table` SET `reset_token` = ?, `token_expiry` = ? WHERE `customer_email` = ?",
+            "sss",
+            $token,
+            $expiry,
+            $email
+        );
 
-        $resetLink = "http://localhost/san/resetPassword.php?token=$token";
-
-        $mail = new PHPMailer(true);
+        $resetLink = "http://localhost/Thusitha-Engineering-E-Commerce-Website/updatePassword.php?token=$token";
 
         try {
-            $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'sahirumejitha123@gmail.com';
-            $mail->Password   = 'mwks ymdk awxr glsp';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port       = 587;
-
-            $mail->setFrom('sahirumejitha123@gmail.com', 'Thusitha Engineering');
+            $mail = createMailer();
             $mail->addAddress($email);
 
-            $mail->isHTML(true);
             $mail->Subject = 'Password Reset Request';
             $mail->Body    = "Click the link to reset your password:<br><a href='$resetLink'>$resetLink</a><br>This link will expire in 1 hour.";
 

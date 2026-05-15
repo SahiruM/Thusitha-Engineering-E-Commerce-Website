@@ -2,12 +2,9 @@
 require "connection.php";
 session_start();
 
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-require 'PHPMailer/src/Exception.php';
+require "mailer.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION["user2"])) {
     $userid = $_SESSION["user2"]["id"];
@@ -77,20 +74,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION["user2"])) {
         <p><strong>Total Order Amount:</strong> $' . number_format($totalOrder, 2) . '</p>';
 
         // Send email to user
-        $mail = new PHPMailer(true);
         try {
-            $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'sahirumejitha123@gmail.com';
-            $mail->Password   = 'mwks ymdk awxr glsp'; // App password
-            $mail->SMTPSecure = 'tls';
-            $mail->Port       = 587;
-
-            $mail->setFrom('sahirumejitha123@gmail.com', 'Thusitha Engineering');
+            $mail = createMailer();
             $mail->addAddress($user_email);
 
-            $mail->isHTML(true);
             $mail->Subject = 'Order Confirmation - Thusitha Engineering';
             $mail->Body = '<h2>Thank you for your order!</h2>' . $htmlTable;
 
@@ -100,20 +87,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION["user2"])) {
         }
 
         // Send email to admin
-        $mail2 = new PHPMailer(true);
         try {
-            $mail2->isSMTP();
-            $mail2->Host       = 'smtp.gmail.com';
-            $mail2->SMTPAuth   = true;
-            $mail2->Username   = 'sahirumejitha123@gmail.com';
-            $mail2->Password   = 'mwks ymdk awxr glsp';
-            $mail2->SMTPSecure = 'tls';
-            $mail2->Port       = 587;
+            $mail2 = createMailer();
+            $mail2->addAddress(MAIL_ADMIN_EMAIL);
 
-            $mail2->setFrom('sahirumejitha123@gmail.com', 'Thusitha Engineering');
-            $mail2->addAddress('sahirumejitha123@gmail.com'); // Admin email
-
-            $mail2->isHTML(true);
             $mail2->Subject = 'New Order Received - Thusitha Engineering';
             $mail2->Body = '<h2>New order placed by ' . htmlspecialchars($email) . '</h2>' . $htmlTable;
 
