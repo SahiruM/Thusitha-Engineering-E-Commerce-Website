@@ -60,104 +60,63 @@ while ($row = $ratingQuery->fetch_assoc()) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cool Admin Dashboard</title>
+    <title>Admin Dashboard | Thusitha Engineering</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Bayon&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="manageUsersStyles.css">
     <link rel="stylesheet" href="adminHeader.css">
     <style>
-
-
-    body {
-        margin: 0;
-        font-family: 'Bayon', sans-serif;
-        background: #000;
-        color: #fff;
-    }
-
-    h1 {
-        text-align: center;
-        padding: 30px 0;
-        font-size: 50px;
-        background: #000;
-        margin: 0;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        color: #FF9400;
-        font-weight: normal;
-
-    }
-
     .dashboard {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 20px;
-        padding: 40px 20px;
+        width: min(1220px, calc(100% - 32px));
+        margin: 32px auto 56px;
     }
 
     .info-box {
-        position: relative;
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        padding: 25px;
-        width: 480px;
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .info-box:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 35px rgba(255, 148, 0, 0.25);
+        padding: 22px;
     }
 
     .info-box h2 {
-        font-size: 1.5em;
-        margin-bottom: 12px;
-        color: #FF9400;
-        font-weight: normal;
-        letter-spacing: 1px;
+        margin: 0 0 8px;
+        color: #657173;
+        font-size: 0.86rem;
+        text-transform: uppercase;
     }
 
     .info-box p {
-        font-size: 1.9em;
-        font-weight: normal;
-        color: #ffffff;
+        margin: 0;
+        color: #172021;
+        font-size: 2.2rem;
+        font-weight: 900;
     }
 
     .chart-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 40px;
-        padding: 20px 0 60px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        width: min(1220px, calc(100% - 32px));
+        margin: 32px auto;
     }
 
     .chart {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border-radius: 15px;
-        padding: 10px;
-        width: 500px;
-        height: 550px;
-        color: #fff;
-        border: 1px solid rgba(255, 148, 0, 0.2);
+        min-height: 420px;
+        padding: 20px;
     }
 
     .chart h3 {
-        text-align: center;
-        margin-top: 0px;
-        color: #FF9400;
-        font-weight: normal;
-        font-size:30px;
+        margin: 0 0 16px;
+        color: #172021;
+        font-size: 1rem;
     }
 
     canvas {
-        width: 500px !important;
-        height: 450px !important;
+        width: 100% !important;
+        height: 340px !important;
     }
 </style>
 </head>
@@ -165,7 +124,10 @@ while ($row = $ratingQuery->fetch_assoc()) {
 <?php 
     include "adminHeader.php";
     ?>
-    <h1>ToolStore Admin Dashboard</h1>
+    <section class="admin-hero">
+        <h1>Admin Dashboard</h1>
+        <p>Track store activity, product stock, orders, messages, and rating performance from one control surface.</p>
+    </section>
 
 
 

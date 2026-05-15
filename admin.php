@@ -242,7 +242,7 @@ if (!isset($_SESSION["admin"])) {
   <!-- Product Table -->
   <div class="table-container">
     <div class="table-card">
-      <h2 style="text-align: center; margin-bottom: 20px;">Edit Existing Products</h2>
+      <h2>Edit Existing Products</h2>
       <table>
         <thead>
           <tr>
@@ -295,10 +295,9 @@ if (!isset($_SESSION["admin"])) {
   </div>
 
   <!-- Edit Modal -->
-  <div id="editModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-    background-color: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000;">
-    <div class="form-card" style="position: relative; max-width: 400px; width: 90%;">
-      <span onclick="closeModal()" style="position: absolute; top: 10px; right: 16px; cursor: pointer; color: white; font-size: 20px;">&times;</span>
+  <div id="editModal" class="admin-modal">
+    <div class="form-card modal-card">
+      <button class="modal-close" onclick="closeModal()" type="button" aria-label="Close modal">&times;</button>
       <div class="form-group">
         <label for="editProductName">Product Name:</label>
         <input type="text" id="editProductName" name="editProductName" required>
@@ -323,20 +322,9 @@ if (!isset($_SESSION["admin"])) {
     </div>
   </div>
    
-  <div style="text-align: center; margin: 20px;">
+  <div class="table-container">
     <form action="downloaddd_report.php" method="post">
-        <button type="submit" style="
-            background: linear-gradient(to right, #00c853, #00e676);
-            color: white;
-            padding: 12px 24px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 230, 118, 0.4);
-            transition: background 0.3s ease;
-        ">Download Ratings Report</button>
+        <button class="report-action" type="submit">Download Ratings Report</button>
     </form>
 </div>
 

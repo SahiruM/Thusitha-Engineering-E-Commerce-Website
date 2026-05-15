@@ -1,32 +1,225 @@
-.header {
-    background-color: #ffa500;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    font-family: 'Bayon', sans-serif;
+:root {
+  --admin-bg: #f5f7f7;
+  --admin-ink: #172021;
+  --admin-muted: #657173;
+  --admin-line: #e1e7e8;
+  --admin-orange: #ff9400;
+  --admin-panel: #ffffff;
+  --admin-dark: #12191a;
+}
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--admin-bg);
+  color: var(--admin-ink);
+  font-family: "Inter", "Roboto", Arial, sans-serif;
+}
+
+.admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px clamp(16px, 4vw, 42px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--admin-dark);
+  box-shadow: 0 12px 30px rgba(18, 25, 26, 0.18);
+}
+
+.admin-brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.admin-brand span {
+  color: var(--admin-orange);
+  font-family: "Bayon", "Inter", sans-serif;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.admin-brand strong {
+  font-size: 0.82rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.admin-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+}
+
+.admin-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 8px;
+  color: #edf2f2;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.admin-nav a:hover,
+.admin-nav a:focus-visible {
+  background: rgba(255, 148, 0, 0.16);
+  color: var(--admin-orange);
+  outline: none;
+}
+
+.admin-page {
+  padding: clamp(28px, 5vw, 56px);
+}
+
+.admin-hero,
+.hero {
+  padding: clamp(32px, 5vw, 56px) clamp(18px, 4vw, 36px);
+  background: linear-gradient(135deg, #12191a 0%, #263233 100%);
+  color: #fff;
+}
+
+.admin-hero h1,
+.hero h1 {
+  margin: 0;
+  color: #fff;
+  font-family: "Bayon", "Inter", sans-serif;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.admin-hero p {
+  max-width: 680px;
+  margin: 12px 0 0;
+  color: #d6dedf;
+  line-height: 1.7;
+}
+
+.table-container {
+  width: min(1220px, calc(100% - 32px));
+  margin: 32px auto 64px;
+}
+
+.table-card,
+.form-card,
+.info-box,
+.chart {
+  border: 1px solid var(--admin-line);
+  border-radius: 8px;
+  background: var(--admin-panel);
+  color: var(--admin-ink);
+  box-shadow: 0 18px 40px rgba(18, 25, 26, 0.08);
+}
+
+.table-card {
+  overflow-x: auto;
+  padding: 22px;
+}
+
+.table-card h2 {
+  margin: 0 0 18px;
+  font-size: 1.15rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--admin-line);
+}
+
+th {
+  background: var(--admin-dark);
+  color: #fff;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+tbody tr:nth-child(even) {
+  background: #f8fafb;
+}
+
+button,
+.action-btn {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.action-btn,
+.edit-btn {
+  background: var(--admin-orange);
+  color: #111;
+}
+
+.delete-btn {
+  background: #d92d20;
+  color: #fff;
+}
+
+.report-action {
+  margin-bottom: 14px;
+  background: #17803b;
+  color: #fff;
+}
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(18, 25, 26, 0.74);
+}
+
+.modal-card {
+  position: relative;
+  width: min(420px, 100%);
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 38px;
+  min-height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  background: #f1f4f4;
+  color: var(--admin-ink);
+  font-size: 1.4rem;
+}
+
+@media (max-width: 760px) {
+  .admin-header {
+    display: block;
   }
 
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
+  .admin-nav {
+    margin-top: 12px;
   }
-
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover {
-    color: #000;
-  }
+}

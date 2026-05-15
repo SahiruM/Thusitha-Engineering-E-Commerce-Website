@@ -35,7 +35,8 @@ require "connection.php";
 
     <div class="table-container">
         <div class="table-card">
-            <h2 style="text-align: center; margin-bottom: 20px;">Registered Users</h2>
+            <h2>Registered Users</h2>
+            <button class="report-action" onclick="window.location.href='generateRecentSignupReport.php';">Download Report (PDF)</button>
             <table>
                 <thead>
                     <tr>
@@ -46,8 +47,6 @@ require "connection.php";
                         <th>Registration Date</th>
                         <th>Manage</th>
                     </tr>
-                    <button onclick="window.location.href='generateRecentSignupReport.php';" style="margin-left: 2px; padding: 8px 16px; background-color:rgb(7, 248, 176); color: white; border: none; border-radius: 4px; cursor: pointer;">
-                    Download Report (PDF) </button>
                 </thead>
                 <tbody>
                     <?php

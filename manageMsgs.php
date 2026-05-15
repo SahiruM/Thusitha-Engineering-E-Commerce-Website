@@ -34,12 +34,10 @@ require "connection.php";
 
     <div class="table-container">
         <div class="table-card">
-            <h2 style="text-align: center; margin-bottom: 20px;">Received Messages</h2>
+            <h2>Received Messages</h2>
 
-            <div style="text-align: right; margin-bottom: 15px;">
-                <button onclick="clearAllMessages()" style="padding: 8px 16px; background-color: red; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                    🧹 Clear All Messages
-                </button>
+            <div style="margin-bottom: 15px;">
+                <button class="delete-btn" onclick="clearAllMessages()">Clear All Messages</button>
             </div>
 
             <table>
