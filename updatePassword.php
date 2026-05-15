@@ -3,11 +3,16 @@ require "connection.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the token and new password from the form
-    $token = $_POST["token"];
-    $newPassword = $_POST["new_password"];
+    $token = $_POST["token"] ?? "";
+    $newPassword = $_POST["new_password"] ?? "";
+
+    if ($token === "" || strlen($newPassword) < 8) {
+        echo "Invalid token or password is too short.";
+        exit();
+    }
 
     // Get user data based on the token
-    $result = Database::search("SELECT * FROM `customer_table` WHERE `reset_token` = '$token'");
+    $result = Database::select("SELECT * FROM `customer_table` WHERE `reset_token` = ?", "s", $token);
 
     if ($result->num_rows == 1) {
         // Token is valid, proceed with updating password
@@ -18,9 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($currentTime > $user["token_expiry"]) {
             echo "❌ Invalid or expired token.";
         } else {
-            // Update the password in the database (plain text, no hashing)
-            Database::iud("UPDATE `customer_table` SET `customer_password` = '$newPassword', `reset_token` = NULL, `token_expiry` = NULL WHERE `reset_token` = '$token'");
-            Database::iud("UPDATE `user` SET `password` = '$newPassword'");
+            $passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+            Database::execute(
+                "UPDATE `customer_table` SET `customer_password` = ?, `reset_token` = NULL, `token_expiry` = NULL WHERE `reset_token` = ?",
+                "ss",
+                $passwordHash,
+                $token
+            );
+            Database::execute("UPDATE `user` SET `password` = ? WHERE `email` = ?", "ss", $passwordHash, $user["customer_email"]);
 
             echo "✅ Password updated successfully.";
         }
