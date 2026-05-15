@@ -2,17 +2,29 @@
 require "connection.php";
 session_start();
 
-$userid = $_SESSION["user2"]["id"];
+if (!isset($_SESSION["user2"]["id"])) {
+    header("Location: login.php");
+    exit();
+}
+
+$userid = (int)$_SESSION["user2"]["id"];
 
 // Fetch user's cart
-$cartResult = Database::search("SELECT * FROM `cart` WHERE `user_id` = '$userid'");
+$cartResult = Database::select("SELECT * FROM `cart` WHERE `user_id` = ?", "i", $userid);
 $cartData = $cartResult->fetch_assoc();
 
+if (!$cartData) {
+    header("Location: cart.php");
+    exit();
+}
+
 // Fetch cart items
-$cartItemResults = Database::search(
+$cartItemResults = Database::select(
     "SELECT * FROM `cart_item`
      INNER JOIN `product` ON `product`.`product_id` = `cart_item`.`product_product_id`
-     WHERE `cart_cart_id` = " . $cartData['cart_id']
+     WHERE `cart_cart_id` = ?",
+    "i",
+    $cartData['cart_id']
 );
 ?>
 
@@ -57,10 +69,10 @@ $cartItemResults = Database::search(
                             $total = $price * $qty;
 
                             echo "<tr>
-                                    <td>$productName</td>
-                                    <td>Rs. $price</td>
-                                    <td>$qty</td>
-                                    <td>Rs. $total</td>
+                                    <td>" . htmlspecialchars($productName) . "</td>
+                                    <td>Rs. " . number_format((float)$price, 2) . "</td>
+                                    <td>" . (int)$qty . "</td>
+                                    <td>Rs. " . number_format((float)$total, 2) . "</td>
                                   </tr>";
                         }
                         ?>
