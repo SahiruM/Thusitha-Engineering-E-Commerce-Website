@@ -14,7 +14,7 @@
   <!-- Navbar with Inline CSS -->
 <header style="background-color: #FF9400; display: flex; justify-content: space-between; align-items: center; padding: 30px 20px;">
     <div class="logo" style="flex-shrink: 0;">
-        <img src="assets/images/logo.png" alt="Logo" style="height: 50px;">
+        <img src="assets/Logo.jpg" alt="Logo" style="height: 50px;">
     </div>
     <nav>
         <ul style="list-style: none; display: flex; padding: 0; margin: 0;">
@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li style="margin: 0 40px; position: relative;">
-                <a href="#" style="text-decoration: none; color: black; position: relative; padding-bottom: 5px; font-size: 25px; font-family: 'Inter';"
+                <a href="shop.php" style="text-decoration: none; color: black; position: relative; padding-bottom: 5px; font-size: 25px; font-family: 'Inter';"
                    onmouseover="this.querySelector('span').style.width='100%';"
                    onmouseout="this.querySelector('span').style.width='0';">
                     SHOP
@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li style="margin: 0 40px; position: relative;">
-                <a href="#" style="text-decoration: none; color: black; position: relative; padding-bottom: 5px; font-size: 25px; font-family: 'Inter';"
+                <a href="contact.php" style="text-decoration: none; color: black; position: relative; padding-bottom: 5px; font-size: 25px; font-family: 'Inter';"
                    onmouseover="this.querySelector('span').style.width='100%';"
                    onmouseout="this.querySelector('span').style.width='0';">
                     CONTACT
@@ -43,7 +43,7 @@
                 </a>
             </li>
             <li style="margin: 0 40px; position: relative;">
-                <a href="#" style="text-decoration: none; color: black; position: relative; padding-bottom: 5px; font-size: 25px; font-family: 'Inter';"
+                <a href="about.php" style="text-decoration: none; color: black; position: relative; padding-bottom: 5px; font-size: 25px; font-family: 'Inter';"
                    onmouseover="this.querySelector('span').style.width='100%';"
                    onmouseout="this.querySelector('span').style.width='0';">
                     ABOUT
@@ -103,7 +103,7 @@ function Adminlogin() {
             }
         }
     };
-    request.open("POST", "adminloginProcess.php", true);
+    request.open("POST", "adminLoginProcess.php", true);
     request.send(form);
 }
 

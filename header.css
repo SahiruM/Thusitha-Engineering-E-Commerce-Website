@@ -1,29 +1,161 @@
-/* Navigation Links */
-.nav-link {
-    color: black;
-    font-size: 25px;
-    text-decoration: none;
-    text-transform: uppercase;
-    position: relative;
-    transition: color 0.3s ease;
-    font-family: 'Inter';
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px clamp(16px, 4vw, 48px);
+    background-color: #ff9400;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
 }
 
-.nav-link:hover {
-    color: #000000;
+.site-logo {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.site-logo img {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.site-nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(16px, 3vw, 44px);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: #111;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+    font-weight: 800;
+    letter-spacing: 0;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 .nav-link::after {
-    content: '';
+    content: "";
     position: absolute;
+    left: 0;
+    bottom: 6px;
     width: 0;
     height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: #080808;
-    transition: width 0.3s ease;
+    background-color: #111;
+    transition: width 180ms ease;
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
     width: 100%;
+}
+
+.nav-link:focus-visible,
+.cart-link:focus-visible,
+.profile-button:focus-visible,
+.dropdown-menu a:focus-visible {
+    outline: 3px solid #111;
+    outline-offset: 3px;
+}
+
+.header-actions {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.cart-link,
+.profile-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.28);
+    cursor: pointer;
+}
+
+.cart-link img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.profile-button img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-menu {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    display: none;
+    min-width: 180px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 12px 16px;
+    color: #111;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 0.95rem;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: #fff4e0;
+}
+
+@media (max-width: 760px) {
+    .site-header {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .site-nav {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .site-nav ul {
+        justify-content: flex-start;
+        gap: 18px;
+        min-width: max-content;
+    }
+
+    .site-logo img {
+        width: 52px;
+        height: 52px;
+    }
 }

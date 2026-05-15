@@ -20,8 +20,10 @@ header {
     z-index: 1000; 
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
 }
-.logo img {
+.logo img,
+.auth-logo img {
     height: 50px;
+    border-radius: 6px;
 }
 nav ul {
     list-style: none;

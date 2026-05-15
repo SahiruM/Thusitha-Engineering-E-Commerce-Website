@@ -85,12 +85,12 @@
 
 <body>
   <nav>
-    <div class="logo"><img src="logo.png" alt="Logo" /></div>
+    <div class="logo"><img src="assets/Logo.jpg" alt="Logo" /></div>
     <ul class="nav-links">
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="#">SHOP</a></li>
-      <li><a href="#">CONTACT</a></li>
-      <li><a href="#">ABOUT</a></li>
+      <li><a href="index.php">HOME</a></li>
+      <li><a href="shop.php">SHOP</a></li>
+      <li><a href="contact.php">CONTACT</a></li>
+      <li><a href="about.php">ABOUT</a></li>
       <li><a href="wishlist.php">WISHLIST</a></li>
     </ul>
   </nav>

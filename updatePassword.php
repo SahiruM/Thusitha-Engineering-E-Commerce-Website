@@ -45,19 +45,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- Header -->
         <header>
             <div class="logo">
-                <img src="assets/images/logo.png" alt="Logo">
+                <img src="assets/Logo.jpg" alt="Logo">
             </div>
             <nav>
                 <ul>
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">SHOP</a></li>
-                    <li><a href="#">CONTACT</a></li>
-                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="index.php">HOME</a></li>
+                    <li><a href="shop.php">SHOP</a></li>
+                    <li><a href="contact.php">CONTACT</a></li>
+                    <li><a href="about.php">ABOUT</a></li>
                 </ul>
             </nav>
             <div class="user-cart">
-                <a href="#"><img src="assets/cart.png" alt="Cart" required></a>
-                <a href="profile.php"><img src="assets/icons/user.png" alt="User" required></a>
+                <a href="cart.php"><img src="assets/cart.png" alt="Cart" required></a>
+                <a href="profile.php"><img src="assets/user.png" alt="User" required></a>
             </div>
         </header>
 

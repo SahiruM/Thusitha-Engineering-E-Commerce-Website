@@ -233,18 +233,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <div class="logo">
-            <img src="assets/logo.png" alt="Logo">
+            <img src="assets/Logo.jpg" alt="Logo">
         </div>
         <nav>
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="shop.php">Products</a></li>
+                <li><a href="about.php">About</a></li>
             </ul>
         </nav>
         <div class="user-cart">
-            <img src="assets/user-icon.png" alt="User">
-            <img src="assets/cart-icon.png" alt="Cart">
+            <a href="login.php"><img src="assets/user.png" alt="User"></a>
+            <a href="cart.php"><img src="assets/cart.png" alt="Cart"></a>
         </div>
     </header>
 

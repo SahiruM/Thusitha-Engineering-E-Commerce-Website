@@ -9,12 +9,12 @@
 <body>
     <header>
         <nav>
-            <div class="logo"><img src="logo.png" alt="Logo"></div>
+            <div class="logo"><img src="assets/Logo.jpg" alt="Logo"></div>
             <ul class="nav-links">
-                <li><a href="index.html">HOME</a></li>
-                <li><a href="shop.html">SHOP</a></li>
-                <li><a href="contact.html">CONTACT</a></li>
-                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="index.php">HOME</a></li>
+                <li><a href="shop.php">SHOP</a></li>
+                <li><a href="contact.php">CONTACT</a></li>
+                <li><a href="about.php">ABOUT</a></li>
             </ul>
             <div class="cart-icon">🛒</div>
         </nav>

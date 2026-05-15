@@ -13,19 +13,19 @@
     <!-- Header -->
     <header>
         <div class="logo">
-            <img src="assets/images/logo.png" alt="Logo">
+            <img src="assets/Logo.jpg" alt="Logo">
         </div>
         <nav>
             <ul>
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">SHOP</a></li>
-                <li><a href="#">CONTACT</a></li>
-                <li><a href="#">ABOUT</a></li>
+                <li><a href="index.php">HOME</a></li>
+                <li><a href="shop.php">SHOP</a></li>
+                <li><a href="contact.php">CONTACT</a></li>
+                <li><a href="about.php">ABOUT</a></li>
             </ul>
         </nav>
         <div class="user-cart">
-            <a href="#"><img src="assets/cart.png" alt="Cart"></a>
-            <a href="#"><img src="assets/icons/user.png" alt="User"></a>
+            <a href="cart.php"><img src="assets/cart.png" alt="Cart"></a>
+            <a href="profile.php"><img src="assets/user.png" alt="User"></a>
         </div>
     </header>
     <div style="text-align: center; margin-bottom: 20px;">
@@ -43,7 +43,7 @@
                         <div class="success-box">
                             <h1>Order Placed Successfully!</h1>
                             <p>Thank you for your purchase. Your order has been confirmed, and we will process it shortly.</p>
-                            <a href="index.html" class="home-btn">Return to Home</a>
+                            <a href="index.php" class="home-btn">Return to Home</a>
                         </div>
                     </div>
                 </div>
